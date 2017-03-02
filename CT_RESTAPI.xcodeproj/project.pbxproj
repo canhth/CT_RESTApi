@@ -1,0 +1,429 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2563BF781E67D78600CDF20C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2563BF771E67D78600CDF20C /* AppDelegate.swift */; };
+		2563BF7A1E67D78600CDF20C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2563BF791E67D78600CDF20C /* ViewController.swift */; };
+		2563BF7D1E67D78600CDF20C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2563BF7B1E67D78600CDF20C /* Main.storyboard */; };
+		2563BF7F1E67D78600CDF20C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2563BF7E1E67D78600CDF20C /* Assets.xcassets */; };
+		2563BF821E67D78600CDF20C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2563BF801E67D78600CDF20C /* LaunchScreen.storyboard */; };
+		2563BF8B1E67D8EF00CDF20C /* JSON+Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2563BF8A1E67D8EF00CDF20C /* JSON+Alamofire.swift */; };
+		2563BF8D1E67D90100CDF20C /* JSONWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2563BF8C1E67D90100CDF20C /* JSONWrapper.swift */; };
+		2563BF911E67D92700CDF20C /* RESTApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2563BF901E67D92700CDF20C /* RESTApiClient.swift */; };
+		2563BF931E67D94F00CDF20C /* Observable+Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2563BF921E67D94F00CDF20C /* Observable+Alamofire.swift */; };
+		2563BF951E67DB3600CDF20C /* RESTAPI_Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2563BF941E67DB3600CDF20C /* RESTAPI_Utils.swift */; };
+		2563BF971E67F11A00CDF20C /* RESTConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2563BF961E67F11A00CDF20C /* RESTConstants.swift */; };
+		2563BF991E67F1CF00CDF20C /* RESTError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2563BF981E67F1CF00CDF20C /* RESTError.swift */; };
+		2563BF9B1E67F53600CDF20C /* RESTParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2563BF9A1E67F53600CDF20C /* RESTParam.swift */; };
+		2563BF9D1E67F58D00CDF20C /* RESTMultiplePart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2563BF9C1E67F58D00CDF20C /* RESTMultiplePart.swift */; };
+		5DACED781D062C1F440BEDDB /* Pods_CT_RESTAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF578C92537515733CC64A74 /* Pods_CT_RESTAPI.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		2563BF741E67D78600CDF20C /* CT_RESTAPI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CT_RESTAPI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2563BF771E67D78600CDF20C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		2563BF791E67D78600CDF20C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2563BF7C1E67D78600CDF20C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2563BF7E1E67D78600CDF20C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2563BF811E67D78600CDF20C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2563BF831E67D78600CDF20C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2563BF8A1E67D8EF00CDF20C /* JSON+Alamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "JSON+Alamofire.swift"; sourceTree = "<group>"; };
+		2563BF8C1E67D90100CDF20C /* JSONWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONWrapper.swift; sourceTree = "<group>"; };
+		2563BF901E67D92700CDF20C /* RESTApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTApiClient.swift; sourceTree = "<group>"; };
+		2563BF921E67D94F00CDF20C /* Observable+Alamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Observable+Alamofire.swift"; sourceTree = "<group>"; };
+		2563BF941E67DB3600CDF20C /* RESTAPI_Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTAPI_Utils.swift; sourceTree = "<group>"; };
+		2563BF961E67F11A00CDF20C /* RESTConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTConstants.swift; sourceTree = "<group>"; };
+		2563BF981E67F1CF00CDF20C /* RESTError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTError.swift; sourceTree = "<group>"; };
+		2563BF9A1E67F53600CDF20C /* RESTParam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTParam.swift; sourceTree = "<group>"; };
+		2563BF9C1E67F58D00CDF20C /* RESTMultiplePart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTMultiplePart.swift; sourceTree = "<group>"; };
+		682A55970E159CF4D697BBFC /* Pods-CT_RESTAPI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CT_RESTAPI.release.xcconfig"; path = "Pods/Target Support Files/Pods-CT_RESTAPI/Pods-CT_RESTAPI.release.xcconfig"; sourceTree = "<group>"; };
+		8D62009D35028819AF944749 /* Pods-CT_RESTAPI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CT_RESTAPI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CT_RESTAPI/Pods-CT_RESTAPI.debug.xcconfig"; sourceTree = "<group>"; };
+		FF578C92537515733CC64A74 /* Pods_CT_RESTAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CT_RESTAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2563BF711E67D78600CDF20C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5DACED781D062C1F440BEDDB /* Pods_CT_RESTAPI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2563BF6B1E67D78500CDF20C = {
+			isa = PBXGroup;
+			children = (
+				2563BF761E67D78600CDF20C /* CT_RESTAPI */,
+				2563BF751E67D78600CDF20C /* Products */,
+				557F16EA591741652E52605C /* Pods */,
+				D345873A646FB7CE81FB0760 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		2563BF751E67D78600CDF20C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2563BF741E67D78600CDF20C /* CT_RESTAPI.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2563BF761E67D78600CDF20C /* CT_RESTAPI */ = {
+			isa = PBXGroup;
+			children = (
+				2563BF891E67D8DB00CDF20C /* Classes */,
+				2563BF771E67D78600CDF20C /* AppDelegate.swift */,
+				2563BF791E67D78600CDF20C /* ViewController.swift */,
+				2563BF7B1E67D78600CDF20C /* Main.storyboard */,
+				2563BF7E1E67D78600CDF20C /* Assets.xcassets */,
+				2563BF801E67D78600CDF20C /* LaunchScreen.storyboard */,
+				2563BF831E67D78600CDF20C /* Info.plist */,
+			);
+			path = CT_RESTAPI;
+			sourceTree = "<group>";
+		};
+		2563BF891E67D8DB00CDF20C /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				2563BF8A1E67D8EF00CDF20C /* JSON+Alamofire.swift */,
+				2563BF8C1E67D90100CDF20C /* JSONWrapper.swift */,
+				2563BF901E67D92700CDF20C /* RESTApiClient.swift */,
+				2563BF921E67D94F00CDF20C /* Observable+Alamofire.swift */,
+				2563BF941E67DB3600CDF20C /* RESTAPI_Utils.swift */,
+				2563BF961E67F11A00CDF20C /* RESTConstants.swift */,
+				2563BF981E67F1CF00CDF20C /* RESTError.swift */,
+				2563BF9A1E67F53600CDF20C /* RESTParam.swift */,
+				2563BF9C1E67F58D00CDF20C /* RESTMultiplePart.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		557F16EA591741652E52605C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8D62009D35028819AF944749 /* Pods-CT_RESTAPI.debug.xcconfig */,
+				682A55970E159CF4D697BBFC /* Pods-CT_RESTAPI.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		D345873A646FB7CE81FB0760 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FF578C92537515733CC64A74 /* Pods_CT_RESTAPI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2563BF731E67D78600CDF20C /* CT_RESTAPI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2563BF861E67D78600CDF20C /* Build configuration list for PBXNativeTarget "CT_RESTAPI" */;
+			buildPhases = (
+				E09A353521F7BA85CD3DFFEF /* [CP] Check Pods Manifest.lock */,
+				2563BF701E67D78600CDF20C /* Sources */,
+				2563BF711E67D78600CDF20C /* Frameworks */,
+				2563BF721E67D78600CDF20C /* Resources */,
+				4BCB16C94AAC14396FBCE462 /* [CP] Embed Pods Frameworks */,
+				E3D91E20724B653E6763178A /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CT_RESTAPI;
+			productName = CT_RESTAPI;
+			productReference = 2563BF741E67D78600CDF20C /* CT_RESTAPI.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2563BF6C1E67D78500CDF20C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = CanhTran;
+				TargetAttributes = {
+					2563BF731E67D78600CDF20C = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 6U26G342BG;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 2563BF6F1E67D78500CDF20C /* Build configuration list for PBXProject "CT_RESTAPI" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2563BF6B1E67D78500CDF20C;
+			productRefGroup = 2563BF751E67D78600CDF20C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2563BF731E67D78600CDF20C /* CT_RESTAPI */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2563BF721E67D78600CDF20C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2563BF821E67D78600CDF20C /* LaunchScreen.storyboard in Resources */,
+				2563BF7F1E67D78600CDF20C /* Assets.xcassets in Resources */,
+				2563BF7D1E67D78600CDF20C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4BCB16C94AAC14396FBCE462 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CT_RESTAPI/Pods-CT_RESTAPI-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E09A353521F7BA85CD3DFFEF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E3D91E20724B653E6763178A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CT_RESTAPI/Pods-CT_RESTAPI-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2563BF701E67D78600CDF20C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2563BF7A1E67D78600CDF20C /* ViewController.swift in Sources */,
+				2563BF781E67D78600CDF20C /* AppDelegate.swift in Sources */,
+				2563BF9D1E67F58D00CDF20C /* RESTMultiplePart.swift in Sources */,
+				2563BF971E67F11A00CDF20C /* RESTConstants.swift in Sources */,
+				2563BF9B1E67F53600CDF20C /* RESTParam.swift in Sources */,
+				2563BF8B1E67D8EF00CDF20C /* JSON+Alamofire.swift in Sources */,
+				2563BF8D1E67D90100CDF20C /* JSONWrapper.swift in Sources */,
+				2563BF991E67F1CF00CDF20C /* RESTError.swift in Sources */,
+				2563BF931E67D94F00CDF20C /* Observable+Alamofire.swift in Sources */,
+				2563BF911E67D92700CDF20C /* RESTApiClient.swift in Sources */,
+				2563BF951E67DB3600CDF20C /* RESTAPI_Utils.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		2563BF7B1E67D78600CDF20C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2563BF7C1E67D78600CDF20C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		2563BF801E67D78600CDF20C /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2563BF811E67D78600CDF20C /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2563BF841E67D78600CDF20C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		2563BF851E67D78600CDF20C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2563BF871E67D78600CDF20C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8D62009D35028819AF944749 /* Pods-CT_RESTAPI.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 6U26G342BG;
+				INFOPLIST_FILE = CT_RESTAPI/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.canh.tran.CT-RESTAPI";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		2563BF881E67D78600CDF20C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 682A55970E159CF4D697BBFC /* Pods-CT_RESTAPI.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 6U26G342BG;
+				INFOPLIST_FILE = CT_RESTAPI/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.canh.tran.CT-RESTAPI";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2563BF6F1E67D78500CDF20C /* Build configuration list for PBXProject "CT_RESTAPI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2563BF841E67D78600CDF20C /* Debug */,
+				2563BF851E67D78600CDF20C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2563BF861E67D78600CDF20C /* Build configuration list for PBXNativeTarget "CT_RESTAPI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2563BF871E67D78600CDF20C /* Debug */,
+				2563BF881E67D78600CDF20C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2563BF6C1E67D78500CDF20C /* Project object */;
+}
