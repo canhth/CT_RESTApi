@@ -43,7 +43,7 @@ public extension Observable where Element: JSONWrapper {
             
             guard let obj = object else {
                 return Observable<T>.error(RESTError() as! Error)
-            }s
+            }
             
             return Observable<T>.just(obj)
         })
