@@ -156,7 +156,7 @@ public class RESTApiClient: NSObject {
                         observer.onNext(jsonWrapper)
                         observer.onCompleted()
                     } else {
-                        observer.onError(RESTError.parseError(response.data, error: response.result.error).toError())
+                        observer.onError(RESTError.parseErrorFromJson(json, error: response.result.error).toError())
                     }
                 case .failure(let error):
                     if let error = error as? URLError {

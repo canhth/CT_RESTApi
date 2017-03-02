@@ -31,11 +31,8 @@ public struct RESTContants {
     static let kDefineWebserviceResourceUrl             = ""
     static let kDefineWebserviceUploadImage             = "http://gameon.generdev.com/apis/updateProfilePicture.php"
     
-    static let headers = ["Content-Type" : "application/json"]
+    static let headers                                  = ["Content-Type" : "application/json"]
 }
-
-
-
 
 
 open class RESTEnum: NSObject {

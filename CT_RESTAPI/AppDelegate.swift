@@ -13,9 +13,6 @@ import CocoaLumberjack
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
-    
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -28,11 +25,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         fileLogger.logFileManager.maximumNumberOfLogFiles = 7
         DDLog.add(fileLogger)
         
-        DDLogVerbose("Verbose");
-        DDLogDebug("Debug");
-        DDLogInfo("Info");
-        DDLogWarn("Warn");
-        DDLogError("Error");
+        DDLogVerbose("Verbose")
+        DDLogDebug("Debug")
+        DDLogInfo("Info")
+        DDLogWarn("Warn")
+        DDLogError("Error")
         return true
     }
 

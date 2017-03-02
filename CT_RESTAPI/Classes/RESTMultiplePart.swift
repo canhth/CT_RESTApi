@@ -34,7 +34,6 @@ open class RESTMultipart: NSObject {
     }
     
     open class FilePart: RESTMultipart {
-        
         var fileName: String!
         
         init(name: String!, fileName: String!, data: Data!) {

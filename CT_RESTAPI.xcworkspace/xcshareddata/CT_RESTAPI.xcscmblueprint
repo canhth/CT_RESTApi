@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "FC37E6B7EA0CA5FB129DB69C70556B8D42A39C6A",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "FC37E6B7EA0CA5FB129DB69C70556B8D42A39C6A" : 9223372036854775807,
+    "0B62FA7C48C39671849D8C311B58B59713AE957B" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "3D081A9B-0016-47B0-934B-DE0BEB133EE6",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "FC37E6B7EA0CA5FB129DB69C70556B8D42A39C6A" : "CT_RESTAPI\/",
+    "0B62FA7C48C39671849D8C311B58B59713AE957B" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "CT_RESTAPI",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "CT_RESTAPI.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/hoangcanhsek6\/misfit-canh-tran.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "0B62FA7C48C39671849D8C311B58B59713AE957B"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/hoangcanhsek6\/CT_RESTApi.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "FC37E6B7EA0CA5FB129DB69C70556B8D42A39C6A"
+    }
+  ]
+}

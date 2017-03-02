@@ -10,15 +10,6 @@ import Foundation
 import Foundation
 import SwiftyJSON
 
-//public enum CTNetworkErrorType {
-//    
-//    case noNetwork
-//    case timeout
-//    case unauthorized
-//    case business(code: Int, debug:String, message:String)
-//    case unspecified
-//}
-
 public enum CTNetworkErrorType: Error {
     public static let kNoNetwork = -1
     public static let kTimeout = -2
@@ -45,8 +36,6 @@ public enum CTNetworkErrorType: Error {
             return -999
         }
     }
-    
-    
 }
 
 open class RESTError: NSObject {
@@ -58,7 +47,6 @@ open class RESTError: NSObject {
     override init() {
         errorFromResponse = "" //set default string here
         errorFromServer = ""
-        
     }
     
     init(typeError : CTNetworkErrorType) {
@@ -79,7 +67,6 @@ open class RESTError: NSObject {
             errorFromResponse = "" //set default string here
             errorFromServer = ""
         }
-        
     }
     
     open static func parseError(_ responseData: Data?, error: Error?) -> RESTError {

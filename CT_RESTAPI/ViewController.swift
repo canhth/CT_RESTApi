@@ -8,6 +8,8 @@
 
 import UIKit
 import RxSwift
+import ObjectMapper
+import SwiftyJSON
 
 class ViewController: UIViewController {
     
@@ -62,11 +64,6 @@ class LoginParam: RESTParam {
         self.password   <- map["password"]
     }
 }
-
-
-import ObjectMapper
-import SwiftyJSON
-
 
 struct Item: Mappable {
     private enum Key: String, CTAlamofireKey {
