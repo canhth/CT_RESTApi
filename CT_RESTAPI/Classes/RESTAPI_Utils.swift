@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyJSON
+import RxSwift
 
 public protocol CTMappable {
     init?(json: JSON)
@@ -41,5 +42,16 @@ public extension UIImage {
         let filePath = documentsURL.appendingPathComponent(fileName)
         let image  = UIImage(contentsOfFile: filePath.path)
         return image ?? UIImage(named: "ic_avatar")!
+    }
+}
+
+
+public extension Observable {
+    public func continueWithSuccessClosure(block: @escaping (_ element: Element) -> Observable<Element>) -> Observable<Element> {
+        return self.flatMapLatest({ (element) -> Observable<Element> in
+           
+                return block(element)
+            
+        })
     }
 }

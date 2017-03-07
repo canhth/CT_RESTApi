@@ -19,6 +19,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         testAPI()
+        testBoltsFlowWithRxSwift()
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,6 +38,22 @@ class ViewController: UIViewController {
             print("Error")
         }).addDisposableTo(disposeBag)
     }
+    
+    func testBoltsFlowWithRxSwift() {
+        let testBoltsObservable = Observable<Any>.just("0")
+        let continueTask = Observable<Any>.just("1")
+        
+        testBoltsObservable.continueWithSuccessClosure { (result) -> Observable<Any> in
+            return testBoltsObservable
+        }.continueWithSuccessClosure { (result) -> Observable<Any> in
+            return continueTask
+        }.subscribe(onNext: { (value) in
+            print(value)
+        }).addDisposableTo(disposeBag)
+    }
+    
+    
+    
 
 }
 
