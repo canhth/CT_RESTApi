@@ -7,8 +7,6 @@ Refernced libs:
 -[RxAlamofire] 
 - [ObjectMapper]
 - [SwiftJSON]
-- [RxSwif
+- [RxSwift]
 
 
-
-t]
