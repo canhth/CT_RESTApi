@@ -12,15 +12,6 @@
 		2563BF7D1E67D78600CDF20C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2563BF7B1E67D78600CDF20C /* Main.storyboard */; };
 		2563BF7F1E67D78600CDF20C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2563BF7E1E67D78600CDF20C /* Assets.xcassets */; };
 		2563BF821E67D78600CDF20C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2563BF801E67D78600CDF20C /* LaunchScreen.storyboard */; };
-		2563BF8B1E67D8EF00CDF20C /* JSON+Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2563BF8A1E67D8EF00CDF20C /* JSON+Alamofire.swift */; };
-		2563BF8D1E67D90100CDF20C /* JSONWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2563BF8C1E67D90100CDF20C /* JSONWrapper.swift */; };
-		2563BF911E67D92700CDF20C /* RESTApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2563BF901E67D92700CDF20C /* RESTApiClient.swift */; };
-		2563BF931E67D94F00CDF20C /* Observable+Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2563BF921E67D94F00CDF20C /* Observable+Alamofire.swift */; };
-		2563BF951E67DB3600CDF20C /* RESTAPI_Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2563BF941E67DB3600CDF20C /* RESTAPI_Utils.swift */; };
-		2563BF971E67F11A00CDF20C /* RESTConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2563BF961E67F11A00CDF20C /* RESTConstants.swift */; };
-		2563BF991E67F1CF00CDF20C /* RESTError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2563BF981E67F1CF00CDF20C /* RESTError.swift */; };
-		2563BF9B1E67F53600CDF20C /* RESTParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2563BF9A1E67F53600CDF20C /* RESTParam.swift */; };
-		2563BF9D1E67F58D00CDF20C /* RESTMultiplePart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2563BF9C1E67F58D00CDF20C /* RESTMultiplePart.swift */; };
 		5DACED781D062C1F440BEDDB /* Pods_CT_RESTAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF578C92537515733CC64A74 /* Pods_CT_RESTAPI.framework */; };
 /* End PBXBuildFile section */
 
@@ -32,15 +23,6 @@
 		2563BF7E1E67D78600CDF20C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2563BF811E67D78600CDF20C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2563BF831E67D78600CDF20C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2563BF8A1E67D8EF00CDF20C /* JSON+Alamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "JSON+Alamofire.swift"; sourceTree = "<group>"; };
-		2563BF8C1E67D90100CDF20C /* JSONWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONWrapper.swift; sourceTree = "<group>"; };
-		2563BF901E67D92700CDF20C /* RESTApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTApiClient.swift; sourceTree = "<group>"; };
-		2563BF921E67D94F00CDF20C /* Observable+Alamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Observable+Alamofire.swift"; sourceTree = "<group>"; };
-		2563BF941E67DB3600CDF20C /* RESTAPI_Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTAPI_Utils.swift; sourceTree = "<group>"; };
-		2563BF961E67F11A00CDF20C /* RESTConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTConstants.swift; sourceTree = "<group>"; };
-		2563BF981E67F1CF00CDF20C /* RESTError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTError.swift; sourceTree = "<group>"; };
-		2563BF9A1E67F53600CDF20C /* RESTParam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTParam.swift; sourceTree = "<group>"; };
-		2563BF9C1E67F58D00CDF20C /* RESTMultiplePart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTMultiplePart.swift; sourceTree = "<group>"; };
 		682A55970E159CF4D697BBFC /* Pods-CT_RESTAPI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CT_RESTAPI.release.xcconfig"; path = "Pods/Target Support Files/Pods-CT_RESTAPI/Pods-CT_RESTAPI.release.xcconfig"; sourceTree = "<group>"; };
 		8D62009D35028819AF944749 /* Pods-CT_RESTAPI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CT_RESTAPI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CT_RESTAPI/Pods-CT_RESTAPI.debug.xcconfig"; sourceTree = "<group>"; };
 		FF578C92537515733CC64A74 /* Pods_CT_RESTAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CT_RESTAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -79,7 +61,6 @@
 		2563BF761E67D78600CDF20C /* CT_RESTAPI */ = {
 			isa = PBXGroup;
 			children = (
-				2563BF891E67D8DB00CDF20C /* Classes */,
 				2563BF771E67D78600CDF20C /* AppDelegate.swift */,
 				2563BF791E67D78600CDF20C /* ViewController.swift */,
 				2563BF7B1E67D78600CDF20C /* Main.storyboard */,
@@ -88,22 +69,6 @@
 				2563BF831E67D78600CDF20C /* Info.plist */,
 			);
 			path = CT_RESTAPI;
-			sourceTree = "<group>";
-		};
-		2563BF891E67D8DB00CDF20C /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				2563BF8A1E67D8EF00CDF20C /* JSON+Alamofire.swift */,
-				2563BF8C1E67D90100CDF20C /* JSONWrapper.swift */,
-				2563BF901E67D92700CDF20C /* RESTApiClient.swift */,
-				2563BF921E67D94F00CDF20C /* Observable+Alamofire.swift */,
-				2563BF941E67DB3600CDF20C /* RESTAPI_Utils.swift */,
-				2563BF961E67F11A00CDF20C /* RESTConstants.swift */,
-				2563BF981E67F1CF00CDF20C /* RESTError.swift */,
-				2563BF9A1E67F53600CDF20C /* RESTParam.swift */,
-				2563BF9C1E67F58D00CDF20C /* RESTMultiplePart.swift */,
-			);
-			path = Classes;
 			sourceTree = "<group>";
 		};
 		557F16EA591741652E52605C /* Pods */ = {
@@ -201,9 +166,24 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-CT_RESTAPI/Pods-CT_RESTAPI-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/CT_RESTAPI/CT_RESTAPI.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/RxAlamofire/RxAlamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CT_RESTAPI.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAlamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -216,13 +196,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CT_RESTAPI-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E3D91E20724B653E6763178A /* [CP] Copy Pods Resources */ = {
@@ -249,15 +232,6 @@
 			files = (
 				2563BF7A1E67D78600CDF20C /* ViewController.swift in Sources */,
 				2563BF781E67D78600CDF20C /* AppDelegate.swift in Sources */,
-				2563BF9D1E67F58D00CDF20C /* RESTMultiplePart.swift in Sources */,
-				2563BF971E67F11A00CDF20C /* RESTConstants.swift in Sources */,
-				2563BF9B1E67F53600CDF20C /* RESTParam.swift in Sources */,
-				2563BF8B1E67D8EF00CDF20C /* JSON+Alamofire.swift in Sources */,
-				2563BF8D1E67D90100CDF20C /* JSONWrapper.swift in Sources */,
-				2563BF991E67F1CF00CDF20C /* RESTError.swift in Sources */,
-				2563BF931E67D94F00CDF20C /* Observable+Alamofire.swift in Sources */,
-				2563BF911E67D92700CDF20C /* RESTApiClient.swift in Sources */,
-				2563BF951E67DB3600CDF20C /* RESTAPI_Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

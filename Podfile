@@ -10,5 +10,6 @@ pod 'ObjectMapper'
 pod 'SwiftyJSON'
 pod 'RxSwift'
 pod 'CocoaLumberjack/Swift'
+pod 'CT_RESTAPI', :path => 'LocalPods/CT_RESTAPI/'
 
 end

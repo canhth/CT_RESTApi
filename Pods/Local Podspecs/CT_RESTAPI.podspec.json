@@ -1,0 +1,40 @@
+{
+  "name": "CT_RESTAPI",
+  "version": "1.0.0",
+  "license": {
+    "type": "BSD"
+  },
+  "authors": {
+    "Canh Tran": "hoangcanhsek6@gmail.com"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "summary": "Common files",
+  "source_files": "**/*.{swift}",
+  "homepage": "bitbucket.org/hoangcanhsek6",
+  "source": {
+    "path": "LocalPods/CT_RESTAPI"
+  },
+  "requires_arc": true,
+  "pod_target_xcconfig": {
+    "OTHER_LDFLAGS": "-lObjC"
+  },
+  "dependencies": {
+    "RxAlamofire": [
+
+    ],
+    "ObjectMapper": [
+
+    ],
+    "SwiftyJSON": [
+
+    ],
+    "RxSwift": [
+
+    ],
+    "CocoaLumberjack/Swift": [
+
+    ]
+  }
+}

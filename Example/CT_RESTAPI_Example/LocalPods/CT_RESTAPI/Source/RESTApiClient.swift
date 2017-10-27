@@ -15,7 +15,7 @@ import RxSwift
 import Alamofire
 
 
-public class RESTApiClient: NSObject {
+open class RESTApiClient: NSObject {
 
     public typealias RestAPICompletion = (_ result: Any?, _ error: RESTError?) -> Void
     public typealias RestDownloadProgress = (_ bytesRead : Int64, _ totalBytesRead : Int64, _ totalBytesExpectedToRead : Int64) -> Void
@@ -23,7 +23,7 @@ public class RESTApiClient: NSObject {
     
     fileprivate var ResultCompletion : (Any?, RESTError?)
     fileprivate var baseUrl: String = ""
-    var parameters: [String: Any] = [:]
+    public var parameters: [String: Any] = [:]
     fileprivate var headers: [String: String] = RESTContants.headers
     fileprivate var multiparts = NSMutableArray()
     fileprivate var requestBodyType: RESTRequestBodyType
@@ -33,7 +33,7 @@ public class RESTApiClient: NSObject {
     fileprivate let disposeBag = DisposeBag()
     fileprivate let acceptableStatusCodes: [Int]
     //MARK: Base
-    init(subPath: String, functionName: String, method : RESTEnum.RequestMethod, endcoding: RESTEnum.Endcoding) {
+    public init(subPath: String, functionName: String, method : RequestMethod, endcoding: Endcoding) {
         
         //set base url
         baseUrl = RESTContants.kDefineWebserviceUrl + subPath + (functionName.characters.count == 0 ? "" : ("/" + functionName))
@@ -76,7 +76,7 @@ public class RESTApiClient: NSObject {
     //MARK: Properties
     open func setQueryParam(_ param: RESTParam)
     {
-        parameters = param.toDictionary()
+        parameters = param.toJSON()
     }
     
     open func addQueryParam(_ name: String, value: Any)
@@ -147,7 +147,7 @@ public class RESTApiClient: NSObject {
             let completion: (AlamofireDataResponse) -> Void = {[weak self](response) -> Void in
                 let json = JSON(data: response.data ?? Data())
                 let requestCode = "\(Date().timeIntervalSince1970)"
-                DDLogInfo("[\(requestCode)] \(response.response?.statusCode ?? 0) \(self?.baseUrl) \(json) \(response.result.error?.localizedDescription ?? "")")
+                DDLogInfo("[\(requestCode)] \(response.response?.statusCode ?? 0) \(self?.baseUrl ?? "") \(json) \(response.result.error?.localizedDescription ?? "")")
                 
                 switch response.result {
                 case .success(_):
@@ -176,7 +176,6 @@ public class RESTApiClient: NSObject {
                     
                 }
             }
-            
             
             request(self.baseUrl,
                     method: self.requestMethod,

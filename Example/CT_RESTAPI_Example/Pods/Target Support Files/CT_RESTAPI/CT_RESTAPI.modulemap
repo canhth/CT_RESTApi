@@ -1,0 +1,6 @@
+framework module CT_RESTAPI {
+  umbrella header "CT_RESTAPI-umbrella.h"
+
+  export *
+  module * { export * }
+}
