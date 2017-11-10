@@ -30,14 +30,15 @@ class ViewController: UIViewController {
     
     
     func testAPI() {
-        let apiManager = RESTApiClient(subPath: "signIn.php", functionName: "", method: .POST, endcoding: .JSON)
-        let param = LoginParam(email: "hoangcanhsek6@gmail.com", password: "Hoangcanh1")
-        apiManager.setQueryParam(param)
+        let apiManager = RESTApiClient(subPath: "login", functionName: "", method: .POST, endcoding: .JSON)
+        let loginParam = LoginParam(email: "abcdef@gmail.com", password: "abccba!1")
+        apiManager.setQueryParam(loginParam)
         let obserable: Observable<User?> = apiManager.requestObject(keyPath: nil)
-        obserable.subscribe(onNext: { (item) in
-            print("Success")
+        obserable.subscribe(onNext: { (user) in
+            guard let user = user else { return }
+            print("Success: ", user)
         }, onError: { (error) in
-            print("Error")
+            print("Error: ", error)
         }).disposed(by: disposeBag)
     }
     
