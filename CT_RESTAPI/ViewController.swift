@@ -121,15 +121,6 @@ struct BaseCategory: Codable {
     var categories: [Category]
     var status: Bool
     var message: String
-//    enum NestedKeys: String, CodingKey {
-//        case categories
-//    }
-//
-//    public init(from decoder: Decoder) throws {
-//        let values = try decoder.container(keyedBy: NestedKeys.self)
-//        categories = try values.con
-//        category_name = try categoriesValue.decode(String.self, forKey: .category_name)
-//    }
 }
 
 struct Category: Codable {
