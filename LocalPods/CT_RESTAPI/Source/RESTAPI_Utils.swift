@@ -7,19 +7,7 @@
 //
 
 import Foundation
-import SwiftyJSON
 import RxSwift
-
-public protocol CTMappable {
-    init?(json: JSON)
-}
-
-
-infix operator ++
-func ++(left: String, right: String) -> String {
-    return (left as NSString).appendingPathComponent(right)
-}
-
 
 public protocol CTArrayType {
     associatedtype Element

@@ -6,25 +6,27 @@
 //  Copyright © 2017 CanhTran. All rights reserved.
 //
 
-import Foundation
-import ObjectMapper
 
-open class RESTParam: NSObject, Mappable {
-    
-    override init() {
-        super.init()
-    }
-    
-    convenience required public init?(map: Map) {
-        self.init()
-    }
-    
-    public func mapping(map: Map) {
-        
-    }
-    
-    func toDictionary() -> [String : Any] {
-        return self.toJSON()
+// FIXME: Use it when we have diffrent data in response with the same object
+//public struct Safe<T: Decodable>: Decodable {
+//    public let value: T?
+//
+//    public init(from decoder: Decoder) throws {
+//        do {
+//            let container = try decoder.singleValueContainer()
+//            self.value = try container.decode(T.self)
+//        } catch {
+//            assertionFailure("ERROR: \(error)")
+//            // TODO: automatically send a report about a corrupted data
+//            self.value = nil
+//        }
+//    }
+//}
+
+public extension Encodable {
+    var dictionary: [String: Any]? {
+        guard let data = try? JSONEncoder().encode(self) else { return nil }
+        let dictionary = (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)).flatMap { $0 as? [String: Any] }
+        return dictionary
     }
 }
-    

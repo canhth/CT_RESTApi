@@ -27,7 +27,12 @@ public struct RESTContants {
     static let kDefineStatusCodeSuccess                 = 200
     
     //MARK: Webservice url
-    static let kDefineWebserviceUrl                     = "http://gameon.generdev.com/apis/"
+    #if DEBUG
+        static let kDefineWebserviceUrl                     = "http://apps.experfi.com/api/"
+    #else
+        static let kDefineWebserviceUrl                     = "http://apps.experfi.com/api/"
+    #endif
+
     static let kDefineWebserviceResourceUrl             = ""
     static let kDefineWebserviceUploadImage             = "http://gameon.generdev.com/apis/updateProfilePicture.php"
     
@@ -35,19 +40,17 @@ public struct RESTContants {
 }
 
 
-open class RESTEnum: NSObject {
-    
-    enum StatusCode: NSInteger {
-        case success = 200
-    }
-    
-    enum RequestMethod : String {
-        case OPTIONS, GET, HEAD, POST, PUT, PATCH, DELETE, TRACE, CONNECT
-    }
-    
-    enum Endcoding : String {
-        case URL, JSON, CUSTOM
-    }
+
+public enum StatusCode: NSInteger {
+    case success = 200
+}
+
+public enum RequestMethod : String {
+    case OPTIONS, GET, HEAD, POST, PUT, PATCH, DELETE, TRACE, CONNECT
+}
+
+public enum Endcoding : String {
+    case URL, JSON, CUSTOM
 }
 
 

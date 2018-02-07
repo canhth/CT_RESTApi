@@ -8,14 +8,11 @@
 
 import UIKit
 import CocoaLumberjack
-import SwiftyJSON
-import ObjectMapper
-import RxAlamofire
 import RxSwift
 import Alamofire
 
 
-public class RESTApiClient: NSObject {
+open class RESTApiClient: NSObject {
 
     public typealias RestAPICompletion = (_ result: Any?, _ error: RESTError?) -> Void
     public typealias RestDownloadProgress = (_ bytesRead : Int64, _ totalBytesRead : Int64, _ totalBytesExpectedToRead : Int64) -> Void
@@ -32,11 +29,12 @@ public class RESTApiClient: NSObject {
     fileprivate var mappingPath: String = ""
     fileprivate let disposeBag = DisposeBag()
     fileprivate let acceptableStatusCodes: [Int]
+    
     //MARK: Base
-    init(subPath: String, functionName: String, method : RESTEnum.RequestMethod, endcoding: RESTEnum.Endcoding) {
+    public init(subPath: String, functionName: String, method : RequestMethod, endcoding: Endcoding) {
         
         //set base url
-        baseUrl = RESTContants.kDefineWebserviceUrl + subPath + (functionName.characters.count == 0 ? "" : ("/" + functionName))
+        baseUrl = RESTContants.kDefineWebserviceUrl + subPath + (functionName.count == 0 ? "" : ("/" + functionName))
         requestBodyType = RESTRequestBodyType.json
         
         switch endcoding {
@@ -74,9 +72,9 @@ public class RESTApiClient: NSObject {
     }
     
     //MARK: Properties
-    open func setQueryParam(_ param: RESTParam)
+    open func setQueryParam(_ param: [String: Any]?)
     {
-        parameters = param.toDictionary()
+        parameters = param ?? ["" : ""]
     }
     
     open func addQueryParam(_ name: String, value: Any)
@@ -110,53 +108,30 @@ public class RESTApiClient: NSObject {
     {
         headers[RESTContants.kDefineRESTRequestAuthorizationKey] = authorization
     }
-    
-    open func addPartJson(_ name: String, model: NSObject)
-    {
-        let part = RESTMultipart.JSONPart(name: name, jsonObject: model)
-        self.multiparts.add(part)
+     
+    open func requestObject<T: Codable>() -> Observable<T?> {
+        return baseRequest().autoMappingObject()
     }
     
-    open func addPartFile(_ name: String, fileName: String, data: Data)
-    {
-        let part = RESTMultipart.FilePart(name: name, fileName: fileName, data: data)
-        self.multiparts.add(part)
-    }
-    
-    open func requestObject<T: Mappable>(keyPath: String?) -> Observable<T?> {
-        
-        if let keyPath = keyPath {
-            return baseRequest().autoMappingObject(keyPath)
-        } else {
-            return baseRequest().autoMappingObject()
-        }
-    }
-    
-    open func requestObjects<T: CTArrayType>(keyPath: String? = nil) -> Observable<T> where T.Element: Mappable {
-        var result : Observable<[T.Element]>
-        if let keyPath = keyPath {
-           result  = baseRequest().autoMappingArray(keyPath)
-        } else {
-           result  = baseRequest().autoMappingArray()
-        }
+    open func requestObjects<T: CTArrayType>(keyPath: String? = nil) -> Observable<T> where T.Element: Codable {
+        let result : Observable<[T.Element]> = baseRequest().autoMappingArray(keyPath)
         return result.map {$0 as! T}
     }
     
-    open func baseRequest() -> Observable<JSONWrapper> {
+    open func baseRequest() -> Observable<ResponseWrapper> {
         return Observable.create {[unowned self] observer -> Disposable in
-            let completion: (AlamofireDataResponse) -> Void = {[weak self](response) -> Void in
-                let json = JSON(data: response.data ?? Data())
+            let completion: (AlamofireDataResponse) -> Void = {[weak self](response) -> Void in 
                 let requestCode = "\(Date().timeIntervalSince1970)"
-                DDLogInfo("[\(requestCode)] \(response.response?.statusCode ?? 0) \(self?.baseUrl ?? "") \(json) \(response.result.error?.localizedDescription ?? "")")
+                DDLogInfo("[\(requestCode)] \(response.response?.statusCode ?? 0) \(self?.baseUrl ?? "") \(response.result.debugDescription) \(response.result.error?.localizedDescription ?? "")")
                 
                 switch response.result {
-                case .success(_):
-                    let jsonWrapper = JSONWrapper(json: json, response: response)
-                    if let statusCode = Int(json["status"].stringValue), statusCode < 300 {
-                        observer.onNext(jsonWrapper)
+                case .success( let json ):
+                    let responseWrapper = ResponseWrapper(response: response)
+                    if responseWrapper.checkStatusCodeIsSuccess(json: json ) {
+                        observer.onNext(responseWrapper)
                         observer.onCompleted()
                     } else {
-                        observer.onError(RESTError.parseErrorFromJson(json, error: response.result.error).toError())
+                        observer.onError(RESTError.parseError(response.data, error: response.result.error).toError())
                     }
                 case .failure(let error):
                     if let error = error as? URLError {
@@ -170,19 +145,17 @@ public class RESTApiClient: NSObject {
                         default: break
                         }
                     }
-                    
-                    
                     observer.onError(RESTError.parseError(response.data, error: response.result.error).toError())
-                    
                 }
             }
+            
             
             request(self.baseUrl,
                     method: self.requestMethod,
                     parameters: self.parameters)
                 .validate()
                 .validate(statusCode: self.acceptableStatusCodes)
-                .responseData(queue: DispatchQueue.main, completionHandler: completion)
+                .responseJSON(queue: DispatchQueue.main ,completionHandler: completion)
             
             return Disposables.create {}
             }.do(onError: { (error) in
@@ -190,68 +163,5 @@ public class RESTApiClient: NSObject {
             })
     }
 
-    open func baseUpload(keyName: String, imageName: String, _ completion: @escaping RestAPICompletion)
-    {
-        
-        if let imageData = try? Data(contentsOf: UIImage.getImageProfileURL(fileName: imageName)) {
-            
-            Alamofire.upload( multipartFormData: { multipartFormData in
-                
-                multipartFormData.append(imageData, withName: "image", fileName: imageName, mimeType: "image/png")
-                
-                for (key, value) in self.parameters {
-                    multipartFormData.append((value as! String).data(using: String.Encoding.utf8)!, withName: key)
-                }
-                
-            }, to: RESTContants.kDefineWebserviceUploadImage
-                , encodingCompletion: { (result) in
-                    switch result {
-                    case .success(let upload, _, _):
-                        
-                        upload.uploadProgress(closure: { (Progress) in
-                            print("Upload Progress: \(Progress.fractionCompleted)")
-                        })
-                        
-                        upload.responseJSON { response in
-                            
-                            if let JSON = response.result.value {
-                                print("JSON: \(JSON)")
-                                completion(JSON, nil)
-                            }
-                        }
-                        
-                    case .failure(let encodingError):
-                        let restError = RESTError()
-                        restError.errorFromServer = encodingError.localizedDescription
-                        completion(nil, restError)
-                    }
-                    
-            })
-        }
-        
-    }
-    
-    func imageType(_ imgData : Data) -> String
-    {
-        var c = [UInt8](repeating: 0, count: 1)
-        (imgData as NSData).getBytes(&c, length: 1)
-        
-        let ext : String
-        
-        switch (c[0])
-        {
-        case 0xFF: ext = "jpg"
-            
-        case 0x89: ext = "png"
-            
-        case 0x47: ext = "gif"
-            
-        case 0x49, 0x4D : ext = "tiff"
-            
-        default: ext = "" //unknown
-        }
-        
-        return ext
-    }
     
 }

@@ -7,8 +7,6 @@
 //
 
 import Foundation
-import Foundation
-import SwiftyJSON
 
 public enum CTNetworkErrorType: Error {
     public static let kNoNetwork = -1
@@ -19,7 +17,7 @@ public enum CTNetworkErrorType: Error {
     case noNetwork
     case unauthorized
     case timeout
-    case errorMessage(code: Int, debug:String, message:String)
+    case errorMessage(code: Int, status:Bool, message:String)
     case unspecified(error: Error?)
     
     public var errorCode: Int {
@@ -38,91 +36,52 @@ public enum CTNetworkErrorType: Error {
     }
 }
 
-open class RESTError: NSObject {
+open class RESTError: Codable {
     
     open var errorFromResponse:  String = ""
-    open var errorFromServer:    String = ""
-    open var statusCode:         String = ""
+    open var status:         Bool = false
+    open var HTTP_response_code: Int = 404
     
-    override init() {
-        errorFromResponse = "" //set default string here
-        errorFromServer = ""
+    private enum ErrorKey: String, CodingKey {
+        case errorResponse = "message"
     }
     
     init(typeError : CTNetworkErrorType) {
         switch typeError {
         case .noNetwork:
             errorFromResponse = "No network" //set default string here
-            errorFromServer = "No network"
         case .timeout:
             errorFromResponse = "Request Timeout" //set default string here
-            errorFromServer = "Request Timeout"
         case .unauthorized:
             errorFromResponse = "Unauthorized" //set default string here
-            errorFromServer = "Unauthorized"
         case .unspecified:
             errorFromResponse = "Unspecified" //set default string here
-            errorFromServer = "Unspecified"
         default:
             errorFromResponse = "" //set default string here
-            errorFromServer = ""
         }
+    }
+    
+    public required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: ErrorKey.self)
+        errorFromResponse = try values.decode(String.self, forKey: .errorResponse)
+
     }
     
     open static func parseError(_ responseData: Data?, error: Error?) -> RESTError {
         
-        let restError: RESTError = RESTError.init()
+        var restError: RESTError = RESTError.init(typeError: .noNetwork)
         
-        if (responseData != nil) {
-            let jsonObj: JSON = JSON(data: responseData!)
-            if (jsonObj.null == nil) {
-                let message = jsonObj[RESTContants.kDefineMessageKeyFromResponseData].stringValue
-                let statusCode = jsonObj[RESTContants.kDefineSuccessKeyFromResponseData].stringValue
-                if(message.lengthOfBytes(using: String.Encoding.utf8) > 0) {
-                    restError.errorFromServer = message
-                    restError.statusCode = statusCode
-                }
-                else {
-                    restError.errorFromServer = RESTContants.kDefineDefaultMessageKeyFromResponseData
-                }
-            }
-            else {
-                restError.errorFromServer = (NSString(data: responseData!, encoding: String.Encoding.utf8.rawValue) as String?)!
-            }
-        }
-        
-        if(error != nil) {
-            let errorString: String! = error!.localizedDescription
-            restError.errorFromResponse = errorString
-        }
-        
-        return restError
-    }
-    
-    open static func parseErrorFromJson(_ responseData: Any, error: Error?) -> RESTError {
-        
-        let restError: RESTError = RESTError.init()
-        
-        
-        let jsonObj: JSON = JSON(responseData)
-        if (jsonObj.null == nil) {
-            let message = jsonObj[RESTContants.kDefineMessageKeyFromResponseData].stringValue
-            let statusCode = jsonObj[RESTContants.kDefineSuccessKeyFromResponseData].stringValue
-            if(message.lengthOfBytes(using: String.Encoding.utf8) > 0) {
-                restError.errorFromServer = message
-                restError.statusCode = statusCode
-            }
-            else {
-                restError.errorFromServer = RESTContants.kDefineDefaultMessageKeyFromResponseData
-            }
+        if let responseData = responseData {
+            do {
+                let decoder = JSONDecoder()
+                restError = try decoder.decode(RESTError.self, from: responseData)
+            } catch { print(error) }
         }
         else {
-            let responseJson = responseData as! [String: Any]
-            restError.errorFromServer = (responseJson[RESTContants.kDefineMessageKeyFromResponseData] as! String?)!
+            restError.errorFromResponse = (NSString(data: responseData!, encoding: String.Encoding.utf8.rawValue) as String?)!
         }
         
-        
-        if(error != nil) {
+        if (error != nil) {
             let errorString: String! = error!.localizedDescription
             restError.errorFromResponse = errorString
         }
@@ -130,7 +89,8 @@ open class RESTError: NSObject {
         return restError
     }
     
+
     open func toError() -> Error {
-        return CTNetworkErrorType.errorMessage(code: Int(statusCode) ?? 0, debug: errorFromResponse, message: errorFromServer)
+        return CTNetworkErrorType.errorMessage(code: HTTP_response_code, status: status, message: errorFromResponse)
     }
 }

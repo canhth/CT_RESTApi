@@ -8,77 +8,20 @@
 
 import Foundation
 import RxSwift
-import ObjectMapper
-import SwiftyJSON
 
-public extension Observable where Element: JSONWrapper {
-    public func autoMappingObject<T>(_ keyPath: String? = nil) -> Observable<T?> where T: Mappable {
+public extension Observable where Element: ResponseWrapper {
+    public func autoMappingObject<T>() -> Observable<T?> where T: Codable {
         
-        return self.flatMapLatest({ (jsonWrapper) -> Observable<T?> in
+        return self.flatMapLatest({ (responseWrapper) -> Observable<T?> in
             
-            let jsonWrapper = jsonWrapper as JSONWrapper
-            let object: T? = jsonWrapper.json.mappingObject(keyPath)
-            
+            guard let object: T? = responseWrapper.mappingObject() else { return Observable<T?>.just(nil) }
             return Observable<T?>.just(object)
         })
     }
     
-    public func autoMappingObject<T>(_ keyPath: String? = nil) -> Observable<T?> where T: CTMappable {
-        
-        return self.flatMapLatest({ (jsonWrapper) -> Observable<T?> in
-            
-            let jsonWrapper = jsonWrapper as JSONWrapper
-            let object: T? = jsonWrapper.json.mappingObject(keyPath)
-            
-            return Observable<T?>.just(object)
-        })
-    }
-    
-    public func autoMappingObject<T>(_ keyPath: String? = nil) -> Observable<T> where T: Mappable {
-        
-        return self.flatMapLatest({ (jsonWrapper) -> Observable<T> in
-            
-            let jsonWrapper = jsonWrapper as JSONWrapper
-            let object: T? = jsonWrapper.json.mappingObject(keyPath)
-            
-            guard let obj = object else {
-                return Observable<T>.error(RESTError() as! Error)
-            }
-            
-            return Observable<T>.just(obj)
-        })
-    }
-    
-    public func autoMappingArray<T>(_ keyPath: String? = nil) -> Observable<[T]> where T: Mappable {
-        return self.flatMapLatest({ (jsonWrapper) -> Observable<[T]> in
-            
-            let jsonWrapper = jsonWrapper as JSONWrapper
-            let object: [T] = jsonWrapper.json.mappingArray(keyPath)
-            
-            return Observable<[T]>.just(object)
-        })
-    }
-    
-    public func autoMappingObject<T>(_ keyPath: String? = nil) -> Observable<T> where T: CTMappable {
-        return self.flatMapLatest({ (jsonWrapper) -> Observable<T> in
-            
-            let jsonWrapper = jsonWrapper as JSONWrapper
-            let object: T? = jsonWrapper.json.mappingObject(keyPath)
-            
-            guard let obj = object else {
-                return Observable<T>.error(RESTError() as! Error)
-            }
-            
-            return Observable<T>.just(obj)
-        })
-    }
-    
-    public func autoMappingArray<T>(_ keyPath: String? = nil) -> Observable<[T]> where T: CTMappable {
-        return self.flatMapLatest({ (jsonWrapper) -> Observable<[T]> in
-            
-            let jsonWrapper = jsonWrapper as JSONWrapper
-            let object: [T] = jsonWrapper.json.mappingArray(keyPath)
-            
+    public func autoMappingArray<T>(_ keyPath: String? = nil) -> Observable<[T]> where T: Codable {
+        return self.flatMapLatest({ (responseWrapper) -> Observable<[T]> in
+            let object: [T] = responseWrapper.mappingArray(keyPath)
             return Observable<[T]>.just(object)
         })
     }

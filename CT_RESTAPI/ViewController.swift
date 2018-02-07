@@ -8,8 +8,6 @@
 
 import UIKit
 import RxSwift
-import ObjectMapper
-import SwiftyJSON
 import CT_RESTAPI
 
 class ViewController: UIViewController {
@@ -19,8 +17,13 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        testAPI()
-        testBoltsFlowWithRxSwift()
+//        testAPI()
+//        testBoltsFlowWithRxSwift()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        testAPIWithResponseArray()
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,14 +33,26 @@ class ViewController: UIViewController {
     
     
     func testAPI() {
-        let apiManager = RESTApiClient.init(subPath: "signIn.php", functionName: "", method: .POST, endcoding: .JSON)
-        apiManager.setQueryParam(LoginParam())
-        let obserable: Observable<User?> = apiManager.requestObject(keyPath: nil)
+        let apiManager = RESTApiClient(subPath: "login", functionName: "", method: .POST, endcoding: .URL)
+        apiManager.setQueryParam(LoginParam(email: "hoangcanhsek6@gmail.com", password: "Hoangcanh1").dictionary)
+        let obserable: Observable<User?> = apiManager.requestObject()
+        obserable.subscribe(onNext: { (item) in
+            print("Success")
+        }, onError: { (error) in
+            print("Error \(error)")
+        }).disposed(by: disposeBag)
+    }
+    
+    
+    func testAPIWithResponseArray() {
+        let apiManager = RESTApiClient(subPath: "get_categories", functionName: "", method: .POST, endcoding: .JSON)
+    
+        let obserable: Observable<BaseCategory?> = apiManager.requestObject()
         obserable.subscribe(onNext: { (item) in
             print("Success")
         }, onError: { (error) in
             print("Error")
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
     }
     
     func testBoltsFlowWithRxSwift() {
@@ -46,11 +61,11 @@ class ViewController: UIViewController {
         
         testBoltsObservable.continueWithSuccessClosure { (result) -> Observable<Any> in
             return testBoltsObservable
-        }.continueWithSuccessClosure { (result) -> Observable<Any> in
-            return continueTask
-        }.subscribe(onNext: { (value) in
-            print(value)
-        }).addDisposableTo(disposeBag)
+            }.continueWithSuccessClosure { (result) -> Observable<Any> in
+                return continueTask
+            }.subscribe(onNext: { (value) in
+                print(value)
+            }).disposed(by: disposeBag)
     }
     
     
@@ -58,142 +73,67 @@ class ViewController: UIViewController {
 
 }
 
-class LoginParam: RESTParam {
+class LoginParam: Codable {
     
-    dynamic var email: String = "hoangcanhsek6@gmail.com"
-    dynamic var password: String = "hoangcanh1"
-    
-    override init() {
-        super.init()
-    }
+    @objc var email: String = "hoangcanhsek6@gmail.com"
+    @objc var password: String = "hoangcanh1"
     
     init(email: String, password: String) {
         self.email = email
         self.password = password
-        super.init()
-    }
-    
-    convenience required init?(_ map: Map) {
-        self.init()
-    }
-    
-    override func mapping(map: Map) {
-        self.email      <- map["email"]
-        self.password   <- map["password"]
     }
 }
 
-struct Item: Mappable {
-    private enum Key: String, CTAlamofireKey {
-        case id, name
+
+struct User: Codable {
+    
+    var token: String
+    var firstName: String
+    var lastName = ""
+    var message = ""
+    var email = ""
+    var testOptionalVariable : String?
+
+    enum UserKeys: String, CodingKey {
+        case token
+        case firstName = "fname"
+        case lastName = "lname"
+        case message
+        case email
+        case testOptionalVariable
     }
-    
-    var id: Int = 0
-    var name: String = ""
-    
-    init?(map: Map) {}
-    
-    mutating func mapping(map: Map) {
-        id <- map[Key.id]
-        name <- map[Key.name]
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: UserKeys.self)
+        token = try container.decode(String.self, forKey: .token)
+
+        firstName = try container.decode(String.self, forKey: .firstName)
+        lastName = try container.decode(String.self, forKey: .lastName)
+        message = try container.decode(String.self, forKey: .message)
+        email = try container.decode(String.self, forKey: .email)
+        testOptionalVariable = try container.decodeIfPresent(String.self, forKey: .testOptionalVariable)
+
+
     }
 }
 
-extension Optional {
-    var isNotNil: Bool {
-        switch self {
-        case .none:
-            return false
-        default:
-            return true
-        }
-    }
-    
-    var isNil: Bool {
-        switch self {
-        case .none:
-            return true
-        default:
-            return false
-        }
-    }
+struct BaseCategory: Codable {
+    var categories: [Category]
+    var status: Bool
+    var message: String
+//    enum NestedKeys: String, CodingKey {
+//        case categories
+//    }
+//
+//    public init(from decoder: Decoder) throws {
+//        let values = try decoder.container(keyedBy: NestedKeys.self)
+//        categories = try values.con
+//        category_name = try categoriesValue.decode(String.self, forKey: .category_name)
+//    }
 }
 
-struct Category: CTMappable {
-    
-    private enum Key: String, CTAlamofireKey {
-        case id, name
-    }
-    
-    let id: Int
-    let name: String
-    
-    init?(json: JSON) {
-        guard json[Key.id].int.isNotNil
-            && json[Key.name].string.isNotNil else {
-                return nil
-        }
-        
-        self.id = json[Key.id].intValue
-        self.name = json[Key.name].stringValue
-    }
-}
-
-class User: Mappable {
-    
-    dynamic var email = ""
-    dynamic var birthday = ""
-    dynamic var fname = ""
-    dynamic var lname = ""
-    dynamic var password = ""
-    dynamic var token = ""
-    dynamic var id = ""
-    dynamic var phone = ""
-    dynamic var gender = ""
-    dynamic var notification_levels = ""
-    dynamic var status = ""
-    dynamic var image = ""
-    dynamic var category_id = ""
-    dynamic var created = ""
-    dynamic var last_login = 0
-    dynamic var is_active = ""
-    dynamic var ip = ""
-    dynamic var date_activation_link_sent = ""
-    dynamic var sport = ""
-    
-    required convenience init?(map: Map) {
-        self.init()
-    }
-    
-    func mapping(map: Map) {
-        email                       <- map["email"]
-        birthday                    <- map["birthday"]
-        sport                       <- map["sport"]
-        lname                       <- map["lname"]
-        fname                       <- map["fname"]
-        token                       <- map["token"]
-        id                          <- map["id"]
-        image                       <- map["image"]
-        category_id                 <- map["category_id"]
-        phone                       <- map["phone"]
-        gender                      <- map["gender"]
-        created                     <- map["created"]
-        is_active                   <- map["is_active"]
-        status                      <- map["status"]
-        last_login                  <- map["last_login"]
-        ip                          <- map["ip"]
-        password                    <- map["password"]
-        notification_levels         <- map["notification_levels"]
-        date_activation_link_sent   <- map["date_activation_link_sent"]
-        
-    }
-    
-    func compareValueWith(user: User) -> Bool {
-        return self.fname == user.fname
-            && self.lname == user.lname
-            && self.birthday == user.birthday
-            && self.category_id == user.category_id
-            && self.gender == user.gender
-    }
+struct Category: Codable {
+    var category_id: String?
+    var category_name: String?
     
 }
