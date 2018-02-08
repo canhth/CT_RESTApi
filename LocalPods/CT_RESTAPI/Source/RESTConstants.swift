@@ -11,12 +11,6 @@ import Foundation
 
 public struct RESTContants {
     
-    //MARK: RESTRequest Header Keys
-    static let kDefineRESTRequestHeaderKey              = "Header"
-    static let kDefineRESTRequestAuthorizationKey       = "Authorization"
-    static let kDefineRESTRequestContentTypeKey         = "Content-Type"
-    static let kDefineRESTRequestAcceptKey              = "Accept"
-    
     //MARK: Keys for parser
     static let kDefineSuccessKeyFromResponseData        = "status"
     static let kDefineMessageKeyFromResponseData        = "message"

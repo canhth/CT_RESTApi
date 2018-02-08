@@ -51,13 +51,13 @@ open class RESTError: Codable {
         case .noNetwork:
             errorFromResponse = "No network" //set default string here
         case .timeout:
-            errorFromResponse = "Request Timeout" //set default string here
+            errorFromResponse = "Request Timeout"
         case .unauthorized:
-            errorFromResponse = "Unauthorized" //set default string here
+            errorFromResponse = "Unauthorized"
         case .unspecified:
-            errorFromResponse = "Unspecified" //set default string here
+            errorFromResponse = "Unspecified"
         default:
-            errorFromResponse = "" //set default string here
+            errorFromResponse = "" 
         }
     }
     
