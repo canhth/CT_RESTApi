@@ -13,33 +13,14 @@ public protocol CTArrayType {
     associatedtype Element
 }
 
+// MARK: - To Support generic func for array
 extension Array: CTArrayType {}
-
-
-public extension UIImage {
-    class func getImageProfileURL(fileName: String) -> URL {
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        let documentsURL = paths[0]
-        let filePath = documentsURL.appendingPathComponent(fileName)
-        return filePath
-    }
-    
-    class func getImageProfile(fileName: String) -> UIImage {
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        let documentsURL = paths[0]
-        let filePath = documentsURL.appendingPathComponent(fileName)
-        let image  = UIImage(contentsOfFile: filePath.path)
-        return image ?? UIImage(named: "ic_avatar")!
-    }
-}
-
 
 public extension Observable {
     public func continueWithSuccessClosure(block: @escaping (_ element: Element) -> Observable<Element>) -> Observable<Element> {
         return self.flatMapLatest({ (element) -> Observable<Element> in
-           
                 return block(element)
-            
         })
     }
 }
+

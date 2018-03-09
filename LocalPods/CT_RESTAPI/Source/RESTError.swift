@@ -8,7 +8,9 @@
 
 import Foundation
 
+/// Create the Error type
 public enum CTNetworkErrorType: Error {
+    
     public static let kNoNetwork = -1
     public static let kTimeout = -2
     public static let kUnauthorized = 401
@@ -38,15 +40,15 @@ public enum CTNetworkErrorType: Error {
 
 open class RESTError: Codable {
     
-    open var errorFromResponse:  String = ""
-    open var status:         Bool = false
+    open var errorFromResponse: String = ""
+    open var status: Bool = false
     open var HTTP_response_code: Int = 404
     
     private enum ErrorKey: String, CodingKey {
         case errorResponse = "message"
     }
     
-    init(typeError : CTNetworkErrorType) {
+    init(typeError : CTNetworkErrorType, status: Bool = false, code: Int = 404) {
         switch typeError {
         case .noNetwork:
             errorFromResponse = "No network" //set default string here
@@ -69,7 +71,7 @@ open class RESTError: Codable {
     
     open static func parseError(_ responseData: Data?, error: Error?) -> RESTError {
         
-        var restError: RESTError = RESTError.init(typeError: .noNetwork)
+        var restError: RESTError = RESTError(typeError: .unauthorized)
         
         if let responseData = responseData {
             do {
@@ -83,13 +85,15 @@ open class RESTError: Codable {
         
         if (error != nil) {
             let errorString: String! = error!.localizedDescription
-            restError.errorFromResponse = errorString
+            restError.errorFromResponse = errorString 
         }
         
         return restError
     }
     
-
+    /// Convert RESTError to Error
+    ///
+    /// - Returns: Error object
     open func toError() -> Error {
         return CTNetworkErrorType.errorMessage(code: HTTP_response_code, status: status, message: errorFromResponse)
     }

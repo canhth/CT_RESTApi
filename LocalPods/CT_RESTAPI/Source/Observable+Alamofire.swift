@@ -8,9 +8,14 @@
 
 import Foundation
 import RxSwift
+import ObjectMapper
 
 public extension Observable where Element: ResponseWrapper {
-    public func autoMappingObject<T>() -> Observable<T?> where T: Codable {
+    
+    /// Auto Mapping object with Decodable
+    ///
+    /// - Returns: Observable<T>
+    public func autoMappingObject<T>() -> Observable<T?> where T: Decodable {
         
         return self.flatMapLatest({ (responseWrapper) -> Observable<T?> in
             
@@ -19,9 +24,39 @@ public extension Observable where Element: ResponseWrapper {
         })
     }
     
-    public func autoMappingArray<T>(_ keyPath: String? = nil) -> Observable<[T]> where T: Codable {
+    /// Auto Mapping array objects with Decodable
+    ///
+    /// - Returns: Observable<T>
+    public func autoMappingArray<T>(_ keyPath: String? = nil) -> Observable<[T]> where T: Decodable {
         return self.flatMapLatest({ (responseWrapper) -> Observable<[T]> in
             let object: [T] = responseWrapper.mappingArray(keyPath)
+            return Observable<[T]>.just(object)
+        })
+    }
+    
+    /// Auto Mapping object with ObjectMapper model
+    ///
+    /// - Returns: Observable<T>
+    public func autoMappingObject<T>(_ keyPath: String? = nil) -> Observable<T?> where T: Mappable {
+        
+        return self.flatMapLatest({ (jsonWrapper) -> Observable<T?> in
+            
+            let jsonWrapper = jsonWrapper as ResponseWrapper
+            let object: T? = jsonWrapper.mappingObject(keyPath)
+            
+            return Observable<T?>.just(object)
+        })
+    }
+    
+    /// Auto Mapping Array object with ObjectMapper model
+    ///
+    /// - Returns: Observable<T>
+    public func autoMappingObjectsArray<T>(_ keyPath: String? = nil) -> Observable<[T]> where T: Mappable {
+        return self.flatMapLatest({ (jsonWrapper) -> Observable<[T]> in
+            
+            let jsonWrapper = jsonWrapper as ResponseWrapper
+            let object: [T] = jsonWrapper.mappingArray(keyPath)
+            
             return Observable<[T]>.just(object)
         })
     }

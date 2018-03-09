@@ -8,17 +8,17 @@
 
 import UIKit
 import CocoaLumberjack
+import ObjectMapper
 import RxSwift
 import Alamofire
+import SwiftyJSON
 
 
+/// The main class of CT_RESTAPI
 open class RESTApiClient: NSObject {
-
-    public typealias RestAPICompletion = (_ result: Any?, _ error: RESTError?) -> Void
-    public typealias RestDownloadProgress = (_ bytesRead : Int64, _ totalBytesRead : Int64, _ totalBytesExpectedToRead : Int64) -> Void
-
     
-    fileprivate var ResultCompletion : (Any?, RESTError?)
+    //MARK: - Variables
+    public typealias RestAPICompletion = (_ result: Any?, _ error: RESTError?) -> Void
     fileprivate var baseUrl: String = ""
     var parameters: [String: Any] = [:]
     fileprivate var headers: [String: String] = RESTContants.headers
@@ -30,10 +30,18 @@ open class RESTApiClient: NSObject {
     fileprivate let disposeBag = DisposeBag()
     fileprivate let acceptableStatusCodes: [Int]
     
-    //MARK: Base
+    //MARK: - Main functions
+    
+    /// Init RESTApiClient object
+    ///
+    /// - Parameters:
+    ///   - subPath: Sub path of API URL
+    ///   - functionName: last func of API URL
+    ///   - method: API method
+    ///   - endcoding: API endcoding
     public init(subPath: String, functionName: String, method : RequestMethod, endcoding: Endcoding) {
         
-        //set base url
+        // Set base url
         baseUrl = RESTContants.kDefineWebserviceUrl + subPath + (functionName.count == 0 ? "" : ("/" + functionName))
         requestBodyType = RESTRequestBodyType.json
         
@@ -71,22 +79,10 @@ open class RESTApiClient: NSObject {
         acceptableStatusCodes = Array(200..<300)
     }
     
-    //MARK: Properties
+    //MARK: - Properties
     open func setQueryParam(_ param: [String: Any]?)
     {
         parameters = param ?? ["" : ""]
-    }
-    
-    open func addQueryParam(_ name: String, value: Any)
-    {
-        if let dataValue = value as? Data
-        {
-            parameters[name] = dataValue as Any?
-        }
-        else
-        {
-            parameters[name] = value
-        }
     }
     
     open func addHeader(_ name: String, value: Any)
@@ -94,74 +90,88 @@ open class RESTApiClient: NSObject {
         headers[name] = String(describing: value)
     }
     
-    open func setContentType(_ contentType: String)
-    {
-        headers[RESTContants.kDefineRESTRequestContentTypeKey] = contentType
-    }
+    //MARK: - Base request
     
-    open func setAccept(_ accept: String)
-    {
-        headers[RESTContants.kDefineRESTRequestAcceptKey] = accept
-    }
-    
-    open func setAuthorization(_ authorization: String)
-    {
-        headers[RESTContants.kDefineRESTRequestAuthorizationKey] = authorization
-    }
-     
-    open func requestObject<T: Codable>() -> Observable<T?> {
+    /// Request with Decoable object
+    ///
+    /// - Returns: Observable<Decoable>
+    open func requestObject<T: Decodable>() -> Observable<T?> {
         return baseRequest().autoMappingObject()
     }
     
-    open func requestObjects<T: CTArrayType>(keyPath: String? = nil) -> Observable<T> where T.Element: Codable {
+    open func requestObjects<T: CTArrayType>(keyPath: String? = nil) -> Observable<T> where T.Element:  Decodable {
         let result : Observable<[T.Element]> = baseRequest().autoMappingArray(keyPath)
         return result.map {$0 as! T}
     }
     
+    /// Request with ObjectMapper model
+    ///
+    /// - Parameter keyPath: keyPath of model
+    /// - Returns: Observable<Mappable>
+    open func requestObject<T: Mappable>(keyPath: String?) -> Observable<T?> {
+        if let keyPath = keyPath {
+            return baseRequest().autoMappingObject(keyPath)
+        } else {
+            return baseRequest().autoMappingObject()
+        }
+    }
+    
+    open func requestObjects<T: CTArrayType>(keyPath: String? = nil) -> Observable<T> where T.Element: Mappable {
+        var result : Observable<[T.Element]>
+        if let keyPath = keyPath {
+            result  = baseRequest().autoMappingObjectsArray(keyPath)
+        } else {
+            result  = baseRequest().autoMappingObjectsArray()
+        }
+        return result.map {$0 as! T}
+    }
+    
+    
+    /// Base request functions
+    ///
+    /// - Returns: Response wapper steam
     open func baseRequest() -> Observable<ResponseWrapper> {
-        return Observable.create {[unowned self] observer -> Disposable in
-            let completion: (AlamofireDataResponse) -> Void = {[weak self](response) -> Void in 
-                let requestCode = "\(Date().timeIntervalSince1970)"
-                DDLogInfo("[\(requestCode)] \(response.response?.statusCode ?? 0) \(self?.baseUrl ?? "") \(response.result.debugDescription) \(response.result.error?.localizedDescription ?? "")")
-                
-                switch response.result {
-                case .success( let json ):
-                    let responseWrapper = ResponseWrapper(response: response)
-                    if responseWrapper.checkStatusCodeIsSuccess(json: json ) {
-                        observer.onNext(responseWrapper)
-                        observer.onCompleted()
-                    } else {
-                        observer.onError(RESTError.parseError(response.data, error: response.result.error).toError())
-                    }
-                case .failure(let error):
-                    if let error = error as? URLError {
-                        switch error.errorCode {
-                        case -1009:
-                            observer.onError(RESTError(typeError: .unspecified(error: error)).toError())
-                            return
-                        case NSURLErrorTimedOut:
-                            observer.onError(RESTError(typeError: .timeout).toError())
-                            return
-                        default: break
-                        }
-                    }
-                    observer.onError(RESTError.parseError(response.data, error: response.result.error).toError())
-                }
-            }
-            
-            
+        return Observable.create { observer -> Disposable in 
             request(self.baseUrl,
                     method: self.requestMethod,
                     parameters: self.parameters)
                 .validate()
                 .validate(statusCode: self.acceptableStatusCodes)
-                .responseJSON(queue: DispatchQueue.main ,completionHandler: completion)
+                .responseData(queue: DispatchQueue.main, completionHandler: { [weak self] (response) in
+                    
+                    DDLogInfo("[\(Date().timeIntervalSince1970)] \(response.response?.statusCode ?? 0) \(self?.baseUrl ?? "") \(response.result.debugDescription) \(response.result.error?.localizedDescription ?? "")")
+                    switch response.result {
+                    case .success(_):
+                        do {
+                            let json = try JSON(data: response.data ?? Data())
+                            let responseWrapper = ResponseWrapper(json: json, response: response)
+                            observer.onNext(responseWrapper)
+                            observer.onCompleted()
+                        } catch {
+                            observer.onError(RESTError(typeError: .unspecified(error: error)).toError())
+                            DDLogInfo("Error when parsing JSON: \(error)")
+                        }
+                    case .failure(let error):
+                        if let error = error as? URLError {
+                            switch error.errorCode {
+                            case -1009:
+                                observer.onError(RESTError(typeError: .unspecified(error: error)).toError())
+                                return
+                            case NSURLErrorTimedOut:
+                                observer.onError(RESTError(typeError: .timeout, code: error.errorCode).toError())
+                                return
+                            default: break
+                            }
+                        } 
+                        observer.onError(RESTError.parseError(response.data, error: response.result.error).toError())
+                    }
+                })
             
             return Disposables.create {}
             }.do(onError: { (error) in
                 //self.checkAuthorization(error)
             })
     }
-
+    
     
 }
