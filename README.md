@@ -3,7 +3,7 @@
 ## Description: 
 Create the custom wrapper to request Webservice and mapping the response to Object(s) model. Using RxSwift inside, so if you want to implement this library, you must to have some knowledge about Reactive Programming (RxSwift).
 
-- For support Codable Swift 4. Check out branch: Swift4_codable
+- For support Codable Swift 4. Check out branch: `Swift4_codable`
 
 How to use it: 
 ```swift
